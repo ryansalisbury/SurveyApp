@@ -1,7 +1,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./HomePage"; // Adjust the import path based on your file structure
+import HomePage from "./components/Pages/HomePage"; // Adjust the import path based on your file structure
 
 function App() {
   return (
