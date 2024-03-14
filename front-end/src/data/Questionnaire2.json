@@ -1,0 +1,125 @@
+{
+  "id": "musicPreferences",
+  "title": "Music Preferences Survey",
+  "description": "We're interested in your music tastes and habits.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multipleChoice",
+      "text": "What is your favorite music genre?",
+      "options": [
+        "Rock",
+        "Pop",
+        "Hip-Hop/Rap",
+        "Electronic",
+        "Classical",
+        "Other"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "boolean",
+      "text": "Do you prefer live music performances over studio recordings?",
+      "options": ["True", "False"]
+    },
+    {
+      "id": "q3",
+      "type": "rating",
+      "text": "How important is music in your daily life?",
+      "options": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "q4",
+      "type": "textInput",
+      "text": "Who is your all-time favorite artist or band?",
+      "placeholder": "Your favorite"
+    },
+    {
+      "id": "q5",
+      "type": "multipleChoice",
+      "text": "How do you usually discover new music?",
+      "options": [
+        "Streaming services",
+        "Radio",
+        "Social media",
+        "Friends' recommendations",
+        "Other"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "boolean",
+      "text": "Do you play a musical instrument?",
+      "options": ["True", "False"]
+    },
+    {
+      "id": "q7",
+      "type": "multipleChoice",
+      "text": "How often do you attend live music events?",
+      "options": ["Never", "Rarely", "Occasionally", "Frequently"]
+    },
+    {
+      "id": "q8",
+      "type": "rating",
+      "text": "Rate your interest in international music.",
+      "options": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "q9",
+      "type": "textInput",
+      "text": "What song has been stuck in your head lately?",
+      "placeholder": "Song title"
+    },
+    {
+      "id": "q10",
+      "type": "multipleChoice",
+      "text": "What's your preferred platform for listening to music?",
+      "options": ["Spotify", "Apple Music", "YouTube", "Vinyl/Tape/CD", "Other"]
+    },
+    {
+      "id": "q11",
+      "type": "boolean",
+      "text": "Do you think music can change the world?",
+      "options": ["True", "False"]
+    },
+    {
+      "id": "q12",
+      "type": "rating",
+      "text": "How adventurous are you in exploring new music genres?",
+      "options": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "q13",
+      "type": "multipleChoice",
+      "text": "Which era of music do you feel you belong to?",
+      "options": [
+        "1950s",
+        "1960s",
+        "1970s",
+        "1980s",
+        "1990s",
+        "2000s",
+        "2010s",
+        "Other"
+      ]
+    },
+    {
+      "id": "q14",
+      "type": "textInput",
+      "text": "If you could see any artist or band live, past or present, who would it be?",
+      "placeholder": "Your dream concert"
+    },
+    {
+      "id": "q15",
+      "type": "multipleChoice",
+      "text": "How do you feel about the current state of the music industry?",
+      "options": [
+        "Very positive",
+        "Somewhat positive",
+        "Neutral",
+        "Somewhat negative",
+        "Very negative"
+      ]
+    }
+  ]
+}

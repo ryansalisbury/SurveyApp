@@ -1,0 +1,145 @@
+{
+    "id": "premierLeagueOpinions",
+    "title": "Premier League Football Survey",
+    "description": "Share your opinions on the Premier League.",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multipleChoice",
+        "text": "Who do you think will win the Premier League this season?",
+        "options": [
+          "Manchester City",
+          "Liverpool",
+          "Chelsea",
+          "Manchester United",
+          "Arsenal",
+          "Other"
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "boolean",
+        "text": "Do you think the video assistant referee (VAR) system has improved the quality of matches?",
+        "options": [
+          "True",
+          "False"
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "rating",
+        "text": "How would you rate the overall competitiveness of the Premier League?",
+        "options": [1, 2, 3, 4, 5]
+      },
+      {
+        "id": "q4",
+        "type": "textInput",
+        "text": "What is one thing you would change about the Premier League?",
+        "placeholder": "Your suggestion"
+      },
+      {
+        "id": "q5",
+        "type": "multipleChoice",
+        "text": "Which Premier League team has the best fans?",
+        "options": [
+          "Liverpool",
+          "Manchester United",
+          "Newcastle United",
+          "Leeds United",
+          "Other"
+        ]
+      },
+      {
+        "id": "q6",
+        "type": "boolean",
+        "text": "Do you attend Premier League matches regularly?",
+        "options": [
+          "True",
+          "False"
+        ]
+      },
+      {
+        "id": "q7",
+        "type": "multipleChoice",
+        "text": "Who is the best Premier League player of all time?",
+        "options": [
+          "Thierry Henry",
+          "Alan Shearer",
+          "Cristiano Ronaldo",
+          "Frank Lampard",
+          "Other"
+        ]
+      },
+      {
+        "id": "q8",
+        "type": "rating",
+        "text": "Rate the quality of refereeing in the Premier League.",
+        "options": [1, 2, 3, 4, 5]
+      },
+      {
+        "id": "q9",
+        "type": "multipleChoice",
+        "text": "Which club has the best youth academy?",
+        "options": [
+          "Manchester United",
+          "Chelsea",
+          "Arsenal",
+          "Liverpool",
+          "Other"
+        ]
+      },
+      {
+        "id": "q10",
+        "type": "textInput",
+        "text": "What makes the Premier League special for you?",
+        "placeholder": "Your answer"
+      },
+      {
+        "id": "q11",
+        "type": "multipleChoice",
+        "text": "Which team do you support?",
+        "options": [
+          "Arsenal",
+          "Chelsea",
+          "Liverpool",
+          "Manchester City",
+          "Manchester United",
+          "Other"
+        ]
+      },
+      {
+        "id": "q12",
+        "type": "boolean",
+        "text": "Is the Premier League the most entertaining football league in the world?",
+        "options": [
+          "True",
+          "False"
+        ]
+      },
+      {
+        "id": "q13",
+        "type": "rating",
+        "text": "How would you rate the fairness of the Premier League's financial play regulations?",
+        "options": [1, 2, 3, 4, 5]
+      },
+      {
+        "id": "q14",
+        "type": "multipleChoice",
+        "text": "Which Premier League manager do you admire the most?",
+        "options": [
+          "Pep Guardiola",
+          "Jürgen Klopp",
+          "Thomas Tuchel",
+          "Ole Gunnar Solskjær",
+          "Other"
+        ]
+      },
+      {
+        "id": "q15",
+        "type": "textInput",
+        "text": "In your opinion, what is the most memorable Premier League moment?",
+        "placeholder": "Your memory"
+      }
+    ]
+  }
+  
