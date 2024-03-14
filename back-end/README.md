@@ -32,18 +32,10 @@ This is the backend section of my surbey application, developed using Java with 
 ### Running the Application
 
 To run the application, execute:
-`    mvn spring-boot:run
-   `
+`   mvn spring-boot:run
+  `
 
 This command starts the Spring Boot application.
-
-### Accessing the API
-
-Once the application is running, you can access the API documentation (if Swagger is integrated - need to decide this) at:
-
-- `http://localhost:8080/swagger-ui.html`
-
-This URL might vary based on your Swagger configuration. Swagger UI provides interactive API documentation, where you can test the API endpoints directly.
 
 ## Configuration
 
