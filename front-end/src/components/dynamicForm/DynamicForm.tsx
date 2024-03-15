@@ -1,7 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Questionnaire, Question } from "../../types/questionnaireTypes";
-
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Rating,
+  Switch,
+  filledInputClasses,
+} from "@mui/material";
 
 const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   questionnaire,
@@ -11,7 +21,11 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
+  // Example form data structure
+  interface FormData {
+    // Define structure based on your actual data needs
+    [questionId: string]: string | boolean | number;
+  }
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -21,13 +35,90 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
       {questionnaire.questions.map((question, index) => {
         switch (question.type) {
           case "multipleChoice":
-            return <h1>multipleChoice Question formatting here</h1>;
+            const options = question.options || [];
+            return (
+              <Box
+                sx={{
+                  bgcolor: "grey.100",
+                  width: "auto",
+                  maxWidth: 360,
+                  margin: "auto",
+                  boxShadow: 3,
+                  borderRadius: "16px",
+                }}
+              >
+                <FormControl key={index} component="fieldset">
+                  <FormLabel component="legend">{question.text}</FormLabel>
+                  <RadioGroup
+                    aria-label={question.text}
+                    defaultValue={question.placeholder}
+                    name={question.type}
+                  >
+                    {options.map((option, optionIndex) => (
+                      <FormControlLabel
+                        key={optionIndex}
+                        value={option.toString()}
+                        control={<Radio />}
+                        label={option.toString()}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              </Box>
+            );
           case "boolean":
-            return <h1>Boolean Question formatting here</h1>;
+            return (
+              <Box
+                sx={{
+                  bgcolor: "grey.100",
+                  width: "auto",
+                  maxWidth: 360,
+                  margin: "auto",
+                  boxShadow: 3,
+                  borderRadius: "16px",
+                }}
+              >
+                <FormControlLabel
+                  key={index}
+                  control={<Switch {...register(question.id)} />}
+                  label={question.text}
+                />
+              </Box>
+            );
           case "rating":
-            return <h1>Insert rating header question formatting here here</h1>;
+            return (
+              <Box
+                sx={{
+                  bgcolor: "grey.100",
+                  width: "auto",
+                  maxWidth: 360,
+                  margin: "auto",
+                  boxShadow: 3,
+                  borderRadius: "16px",
+                }}
+              >
+                <FormControl key={index} component="fieldset">
+                  <FormLabel component="legend">{question.text}</FormLabel>
+                </FormControl>
+              </Box>
+            );
           case "textInput":
-            return <h1>Insert textInput question formatting here.</h1>;
+            return (
+              <Box
+                sx={{
+                  bgcolor: "grey.100",
+                  width: "auto",
+                  maxWidth: 360,
+                  margin: "auto",
+                  boxShadow: 3,
+                  borderRadius: "16px",
+                }}
+              >
+                <FormControl key={index} component="fieldset">
+                  <FormLabel component="legend">{question.text}</FormLabel>
+                </FormControl>
+              </Box>
+            );
         }
       })}
       <input type="submit" />
