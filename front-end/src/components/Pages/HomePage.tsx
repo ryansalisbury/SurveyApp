@@ -8,8 +8,16 @@ import Typography from "@mui/material/Typography";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import path from "path";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    // Navigate to the questionnaire example page
+    navigate("/questionnaire-1-test");
+  };
   return (
     <header className="App-header">
       <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
@@ -30,7 +38,7 @@ const HomePage = () => {
           }}
         >
           <List dense={true}>
-            <ListItemButton>
+            <ListItemButton onClick={handleNavigate}>
               <ListItemIcon>
                 <PsychologyAltIcon sx={{ color: "white" }} />
               </ListItemIcon>
