@@ -12,6 +12,7 @@ import {
   Switch,
   TextField,
   filledInputClasses,
+  Button,
 } from "@mui/material";
 import { error } from "console";
 
@@ -23,11 +24,15 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<FormData>();
   // Example form data structure
   interface FormData {
     // Define structure based on your actual data needs
     [questionId: string]: string | boolean | number;
+  }
+  const defaultValues = {
+    
   }
   const onSubmit = (data: any) => {
     console.log("Test submission!");
@@ -37,6 +42,9 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     (questionId: string) => (event: any, newValue: any) => {
       setValue(questionId, newValue);
     };
+  const clearForm = () => {
+    reset(); // React hook form import - resets all inputs to their initial values
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,6 +63,8 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   margin: "auto",
                   boxShadow: 3,
                   borderRadius: "16px",
+                  padding: 2, // Adjust padding as needed
+                  mb: 2,
                 }}
               >
                 <FormControl component="fieldset">
@@ -87,6 +97,8 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   margin: "auto",
                   boxShadow: 3,
                   borderRadius: "16px",
+                  padding: 2, // Adjust padding as needed
+                  mb: 2,
                 }}
               >
                 <FormControlLabel
@@ -106,7 +118,8 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   margin: "auto",
                   boxShadow: 3,
                   borderRadius: "16px",
-                  padding: 2, // Added padding for visual spacing
+                  padding: 2, // Adjust padding as needed
+                  mb: 2,
                 }}
               >
                 <FormControl component="fieldset">
@@ -129,6 +142,8 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   margin: "auto",
                   boxShadow: 3,
                   borderRadius: "16px",
+                  padding: 2, // Adjust padding as needed
+                  mb: 2,
                 }}
               >
                 <FormControl component="fieldset">
@@ -145,7 +160,21 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
             );
         }
       })}
-      <input type="submit" />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 2,
+          marginTop: 2,
+        }}
+      >
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+        <Button onClick={clearForm} variant="outlined" color="secondary">
+          Clear
+        </Button>
+      </Box>
     </form>
   );
 };
