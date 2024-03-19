@@ -31,9 +31,6 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     // Define structure based on your actual data needs
     [questionId: string]: string | boolean | number;
   }
-  const defaultValues = {
-    
-  }
   const onSubmit = (data: any) => {
     console.log("Test submission!");
     console.log(data);
