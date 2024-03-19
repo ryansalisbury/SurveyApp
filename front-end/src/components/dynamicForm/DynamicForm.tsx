@@ -54,7 +54,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
               <Box
                 key={index}
                 sx={{
-                  bgcolor: "grey.100",
+                  bgcolor: "grey.900",
                   width: "auto",
                   maxWidth: 360,
                   margin: "auto",
@@ -64,8 +64,13 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   mb: 2,
                 }}
               >
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">{question.text}</FormLabel>
+                <FormControl
+                  component="fieldset"
+                  sx={{ color: "#fff", "& .MuiSvgIcon-root": { fill: "#fff" } }}
+                >
+                  <FormLabel component="legend" sx={{ color: "#fff" }}>
+                    {question.text}
+                  </FormLabel>
                   <RadioGroup
                     aria-label={question.text}
                     defaultValue={question.placeholder}
@@ -88,7 +93,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
               <Box
                 key={index}
                 sx={{
-                  bgcolor: "grey.100",
+                  bgcolor: "grey.900",
                   width: "auto",
                   maxWidth: 360,
                   margin: "auto",
@@ -101,6 +106,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                 <FormControlLabel
                   control={<Switch {...register(question.id)} />}
                   label={question.text}
+                  sx={{ color: "#fff", "& .MuiSvgIcon-root": { fill: "#fff" } }}
                 />
               </Box>
             );
@@ -109,7 +115,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
               <Box
                 key={index}
                 sx={{
-                  bgcolor: "grey.100",
+                  bgcolor: "grey.900",
                   width: "auto",
                   maxWidth: 360,
                   margin: "auto",
@@ -117,10 +123,16 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   borderRadius: "16px",
                   padding: 2, // Adjust padding as needed
                   mb: 2,
+                  color: "#fff",
                 }}
               >
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">{question.text}</FormLabel>
+                <FormControl
+                  component="fieldset"
+                  sx={{ color: "#fff", "& .MuiSvgIcon-root": { fill: "#fff" } }}
+                >
+                  <FormLabel component="legend" sx={{ color: "#fff" }}>
+                    {question.text}
+                  </FormLabel>
                   <Rating
                     name={question.id}
                     onChange={handleRatingChange(question.id)}
@@ -133,7 +145,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
               <Box
                 key={index}
                 sx={{
-                  bgcolor: "grey.100",
+                  bgcolor: "grey.900",
                   width: "auto",
                   maxWidth: 360,
                   margin: "auto",
@@ -144,13 +156,20 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                 }}
               >
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">{question.text}</FormLabel>
+                  <FormLabel component="legend" sx={{ color: "#fff" }}>
+                    {question.text}
+                  </FormLabel>
                   <TextField
                     {...register(question.id)}
                     variant="outlined"
                     margin="normal"
                     error={!!errors[question.id]}
                     helperText={errors[question.id]?.message}
+                    sx={{
+                      outlineColor: "#fff",
+                      color: "#fff",
+                      "& .MuiSvgIcon-root": { fill: "#fff" },
+                    }}
                   />
                 </FormControl>
               </Box>
