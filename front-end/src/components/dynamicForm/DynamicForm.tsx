@@ -10,8 +10,10 @@ import {
   RadioGroup,
   Rating,
   Switch,
+  TextField,
   filledInputClasses,
 } from "@mui/material";
+import { error } from "console";
 
 const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   questionnaire,
@@ -20,6 +22,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FormData>();
   // Example form data structure
   interface FormData {
@@ -29,6 +32,11 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   const onSubmit = (data: any) => {
     console.log(data);
   };
+  const handleRatingChange =
+    (questionId: string) => (event: any, newValue: any) => {
+      setValue(questionId, newValue);
+    };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Input form fields with switch cases from json schema*/}
@@ -88,6 +96,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
           case "rating":
             return (
               <Box
+                key={index}
                 sx={{
                   bgcolor: "grey.100",
                   width: "auto",
@@ -95,10 +104,15 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   margin: "auto",
                   boxShadow: 3,
                   borderRadius: "16px",
+                  padding: 2, // Added padding for visual spacing
                 }}
               >
-                <FormControl key={index} component="fieldset">
+                <FormControl component="fieldset">
                   <FormLabel component="legend">{question.text}</FormLabel>
+                  <Rating
+                    name={question.id}
+                    onChange={handleRatingChange(question.id)}
+                  />
                 </FormControl>
               </Box>
             );
@@ -116,6 +130,13 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
               >
                 <FormControl key={index} component="fieldset">
                   <FormLabel component="legend">{question.text}</FormLabel>
+                  <TextField
+                    {...register(question.id)}
+                    variant="outlined"
+                    margin="normal"
+                    error={!!errors[question.id]}
+                    helperText={errors[question.id]?.message}
+                  />
                 </FormControl>
               </Box>
             );
