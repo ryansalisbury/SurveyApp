@@ -30,6 +30,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     [questionId: string]: string | boolean | number;
   }
   const onSubmit = (data: any) => {
+    console.log("Test submission!");
     console.log(data);
   };
   const handleRatingChange =
@@ -46,6 +47,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
             const options = question.options || [];
             return (
               <Box
+                key={index}
                 sx={{
                   bgcolor: "grey.100",
                   width: "auto",
@@ -55,7 +57,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   borderRadius: "16px",
                 }}
               >
-                <FormControl key={index} component="fieldset">
+                <FormControl component="fieldset">
                   <FormLabel component="legend">{question.text}</FormLabel>
                   <RadioGroup
                     aria-label={question.text}
@@ -77,6 +79,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
           case "boolean":
             return (
               <Box
+                key={index}
                 sx={{
                   bgcolor: "grey.100",
                   width: "auto",
@@ -87,7 +90,6 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                 }}
               >
                 <FormControlLabel
-                  key={index}
                   control={<Switch {...register(question.id)} />}
                   label={question.text}
                 />
@@ -119,6 +121,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
           case "textInput":
             return (
               <Box
+                key={index}
                 sx={{
                   bgcolor: "grey.100",
                   width: "auto",
@@ -128,7 +131,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   borderRadius: "16px",
                 }}
               >
-                <FormControl key={index} component="fieldset">
+                <FormControl component="fieldset">
                   <FormLabel component="legend">{question.text}</FormLabel>
                   <TextField
                     {...register(question.id)}
