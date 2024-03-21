@@ -1,0 +1,30 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "This is the backend section of my surbey application, developed using Java with Spring Boot and MongoDB. Spring Boot simplifies the development of new Spring applications through convention over configuration, while MongoDB provides a powerful NoSQL database system to handle our data efficiently.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/mongodb": "^8.0.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.26.2",
+    "fastify-cors": "^6.1.0",
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/fastify-cors": "^2.1.0",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^20.11.30",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}
