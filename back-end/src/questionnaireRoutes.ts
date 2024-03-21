@@ -39,7 +39,27 @@ export default function questionnaireRoutes(server: FastifyInstance) {
         console.error(err);
         return reply
           .code(500)
-          .send({ message: "failed to fetch questionnaire " });
+          .send({ message: "failed to fetch questionnaire" });
+      }
+    }
+  );
+  server.delete<{ Params: RouteParamsWithId }>(
+    "/questionnaires/delete/:id",
+    async (request, reply) => {
+      try {
+        // Logic here to delete seleted questionnaire
+        const { id } = request.params;
+        const questionnaire = await server.mongo.db
+          ?.collection("questionnaires")
+          .findOneAndDelete({ id: request.params.id });
+        if (!questionnaire) {
+          return reply.code(404).send;
+        }
+      } catch (err) {
+        console.error(err);
+        return reply
+          .code(500)
+          .send({ message: "Failed to delete selected questionnaire" });
       }
     }
   );
