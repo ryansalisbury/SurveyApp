@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { Questionnaire } from "./models/models";
+import { Questionnaire, RouteParamsWithId } from "./models/models";
 
 export default function questionnaireRoutes(server: FastifyInstance) {
   server.get("/questionnaires", async (request, reply) => {
@@ -12,6 +12,7 @@ export default function questionnaireRoutes(server: FastifyInstance) {
       const questionnaires = await collection?.find({}).toArray();
 
       console.log("Questionnaire log: " + questionnaires);
+
       // sends questionnaires as a response
       return reply.send(questionnaires);
     } catch (err) {
@@ -21,4 +22,25 @@ export default function questionnaireRoutes(server: FastifyInstance) {
         .send({ message: "Failed to fetch questionnaires" });
     }
   });
+  // Need to pass Params for id input to make this work....
+  server.get<{ Params: RouteParamsWithId }>(
+    "/questionnaires/:id",
+    async (request, reply) => {
+      try {
+        const { id } = request.params;
+        const questionnaire = await server.mongo.db
+          ?.collection("questionnaires")
+          .findOne({ id: request.params.id });
+        if (!questionnaire) {
+          return reply.code(404).send({ message: "Questionnaire not found" });
+        }
+        return reply.send(questionnaire);
+      } catch (err) {
+        console.error(err);
+        return reply
+          .code(500)
+          .send({ message: "failed to fetch questionnaire " });
+      }
+    }
+  );
 }
