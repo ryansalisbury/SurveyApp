@@ -27,9 +27,12 @@ export const fetchQuestionnairesNames = async (): Promise<
 
 export const fetchQuestionnaireById = async (
   id: string
-): Promise<{ questionnaire: Questionnaire }> => {
+): Promise<Questionnaire> => {
   try {
-    const response = await axios.get(`${BASE_URL}/${id}`);
+    const response = await axios.get<Questionnaire >(
+      `${BASE_URL}/${id}`
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);

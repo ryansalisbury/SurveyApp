@@ -12,70 +12,56 @@ import { Container, Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { fetchQuestionnaireById } from "../../services/questionnaireService";
 import { error } from "console";
+import { string } from "yup";
+import { useQuery } from "react-query";
 
 const QuestionnairePage: React.FC = () => {
-  const [questionnaire, setQuestionnaire] = useState<Questionnaire | null>(
-    null
-  );
   // extracts id from url
-  const params = useParams();
-  const id = params.id as string;
+  const { id } = useParams<{ id: string }>();
 
-  useEffect(() => {
-    const fetchAndValidateQuestionnaire = async () => {
-      try {
-        let data;
-        console.log(`ID print: ${id}`);
-        //checks id is present
-        if (id) {
-          const response = await fetchQuestionnaireById(id);
-          console.log("response log: ", response);
-          data = response;
-          // data = response.questionnaire;
-          // console.log("data retrieved:", data);
-        } else {
-          //if not then we use exemplar data
-          data = questionnaireData;
-        }
-        // Validate the questionnaire data
-        validateQuestionnaires(data)
-          .then(setQuestionnaire)
-          .catch((error) => console.error("Validation error: ", error));
-      } catch (error) {
-        console.error(
-          "Error fetcjing or validating the questionnaire: ",
-          error
-        );
-      }
-    };
-    fetchAndValidateQuestionnaire();
-  }, [id]);
+  const {
+    data: questionnaire,
+    isLoading,
+    error,
+  } = useQuery<Questionnaire, Error>(
+    ["fetchQuestionnaire", id],
+    () => fetchQuestionnaireById(id!),
+    {
+      initialData: id ? undefined : (questionnaireData as Questionnaire),
+    }
+  );
+
+  console.log({ questionnaire, isLoading, error });
 
   return (
     <div>
       <NavBar />
-      {questionnaire ? (
-        <Box
-          sx={{
-            my: 4,
-            bgcolor: "#282c34",
-            p: 2,
-            borderRadius: "4px",
-            color: "white",
-          }}
-        >
-          <Typography
-            variant="h4"
-            component="h1"
-            gutterBottom
-            style={{ color: "inherit" }}
-          >
-            {questionnaire.title}
-          </Typography>
-          <DynamicForm questionnaire={questionnaire} />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Typography>Loading...</Typography>
+      ) : error ? (
+        <Typography>Error: {error.message}</Typography>
+      ) : (
+        questionnaire && (
+          <Box
+            sx={{
+              my: 4,
+              bgcolor: "#282c34",
+              p: 2,
+              borderRadius: "4px",
+              color: "white",
+            }}
+          >
+            <Typography
+              variant="h4"
+              component="h1"
+              gutterBottom
+              style={{ color: "inherit" }}
+            >
+              {questionnaire.title}
+            </Typography>
+            <DynamicForm questionnaire={questionnaire} />
+          </Box>
+        )
       )}
     </div>
   );
