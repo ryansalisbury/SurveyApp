@@ -10,6 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import path from "path";
 import { useNavigate } from "react-router-dom";
+import QuestionnaireList from "../questionnaireList/questionnaireList";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -37,44 +38,7 @@ const HomePage = () => {
             borderRadius: "16px",
           }}
         >
-          <List dense={true}>
-            <ListItemButton onClick={handleNavigate}>
-              <ListItemIcon>
-                <PsychologyAltIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText
-                primary="QuestionnaireName 1"
-                sx={{ whiteSpace: "nowrap" }}
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <PsychologyAltIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText
-                primary="QuestionnaireName 2"
-                sx={{ whiteSpace: "nowrap" }}
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <PsychologyAltIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText
-                primary="QuestionnaireName 3"
-                sx={{ whiteSpace: "nowrap" }}
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <PsychologyAltIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText
-                primary="QuestionnaireName 4"
-                sx={{ whiteSpace: "nowrap" }}
-              />
-            </ListItemButton>
-          </List>
+          <QuestionnaireList />
         </Box>
       </div>
     </header>

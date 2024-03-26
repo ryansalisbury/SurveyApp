@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/questionnaire-1-test" element={<QuestionnairePage />} />
+        <Route path="/questionnaire/:id" element={<QuestionnairePage />} />
         {/* Add more Route components here for additional pages */}
       </Routes>
     </Router>

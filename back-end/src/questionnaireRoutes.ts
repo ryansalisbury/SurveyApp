@@ -1,8 +1,10 @@
 import { FastifyInstance } from "fastify";
 import { Questionnaire, RouteParamsWithId } from "./models/models";
+import { request } from "http";
+import { ObjectId } from "mongodb";
 
 export default function questionnaireRoutes(server: FastifyInstance) {
-  server.get("/questionnaires", async (request, reply) => {
+  server.get("/api/questionnaires", async (request, reply) => {
     try {
       console.log("MongoDB Server console.log" + server.mongo.db);
 
@@ -24,27 +26,33 @@ export default function questionnaireRoutes(server: FastifyInstance) {
   });
   // Need to pass Params for id input to make this work....
   server.get<{ Params: RouteParamsWithId }>(
-    "/questionnaires/:id",
+    "/api/questionnaires/:id",
     async (request, reply) => {
       try {
         const { id } = request.params;
+        const objId = new ObjectId(id);
         const questionnaire = await server.mongo.db
           ?.collection("questionnaires")
-          .findOne({ id: request.params.id });
+          .findOne({ _id: objId });
         if (!questionnaire) {
           return reply.code(404).send({ message: "Questionnaire not found" });
         }
         return reply.send(questionnaire);
       } catch (err) {
+        if (err instanceof Error && err.name === "BSONTypeError") {
+          return reply
+            .code(400)
+            .send({ message: "Invalid questionnaire ID format" });
+        }
         console.error(err);
         return reply
           .code(500)
-          .send({ message: "failed to fetch questionnaire" });
+          .send({ message: "Failed to fetch questionnaire" });
       }
     }
   );
   server.delete<{ Params: RouteParamsWithId }>(
-    "/questionnaires/delete/:id",
+    "/api/questionnaires/delete/:id",
     async (request, reply) => {
       try {
         // Logic here to delete seleted questionnaire
@@ -60,6 +68,24 @@ export default function questionnaireRoutes(server: FastifyInstance) {
         return reply
           .code(500)
           .send({ message: "Failed to delete selected questionnaire" });
+      }
+    }
+  );
+  server.get(
+    "/api/questionnaires/questionnaireNames",
+    async (request, reply) => {
+      try {
+        const questionnaires = await server.mongo.db
+          ?.collection("questionnaires")
+          .find({}, { projection: { title: 1 } })
+          .toArray();
+
+        reply.send(questionnaires?.map((q) => ({ id: q._id, title: q.title })));
+      } catch (error) {
+        console.error(error);
+        reply
+          .status(500)
+          .send({ message: "Failed to fetch questionnaire name" });
       }
     }
   );
