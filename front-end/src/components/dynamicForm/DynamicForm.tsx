@@ -33,7 +33,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   }
   const onSubmit = (data: any) => {
     console.log("Test submission!");
-    console.log(data);
+    console.log({ data });
   };
   const handleRatingChange =
     (questionId: string) => (event: any, newValue: any) => {
