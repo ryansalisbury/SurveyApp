@@ -6,7 +6,6 @@ import questionnaireRoutes from "./questionnaireRoutes";
 
 dotenv.config();
 const mongoDbUri = process.env.MONGODB_URI;
-console.log(`MongoDB URI: ${mongoDbUri}`);
 
 const buildServer = () => {
   const server = fastify({ logger: true });

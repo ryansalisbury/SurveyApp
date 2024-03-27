@@ -14,7 +14,6 @@ function App() {
       userId = uuidv4();
       localStorage.setItem("userId", userId);
     }
-    console.log("User Id: ", userId);
   }, []);
   return (
     <Router>

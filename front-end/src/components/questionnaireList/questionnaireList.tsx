@@ -32,7 +32,6 @@ const QuestionnaireList: React.FC = () => {
   );
 
   const handleNavigate = (id: string) => {
-    console.log(`Navigating to questionnaire with ID: ${id}`); // Temporarily log the ID
     navigate(`/questionnaire/${id}`);
   };
   if (isLoading) return <div>Loading...</div>;

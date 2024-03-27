@@ -31,7 +31,6 @@ export const fetchQuestionnaireById = async (
 ): Promise<Questionnaire> => {
   try {
     const response = await axios.get<Questionnaire>(`${BASE_URL}/${id}`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -45,7 +44,6 @@ export const questionnaireNewSubmission = async ({
   userId,
 }: SubmissionPayload) => {
   try {
-    console.log(" SUBMITTING NEW QUESTIONNIARE");
     const response = await axios.post(`${BASE_URL}/submit-questionnaire`, {
       questionnaireId,
       answers,

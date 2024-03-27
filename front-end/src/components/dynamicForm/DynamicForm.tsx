@@ -45,13 +45,20 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   );
 
   const onSubmit = (formData: FormData) => {
+    console.log("formData: ", { formData });
     const userId = localStorage.getItem("userId") || "";
+    console.log("Final submission payload:", {
+      questionnaireId: questionnaire.id,
+      answers: formData,
+      userId,
+    });
 
     const submissionPayload = {
       questionnaireId: questionnaire.id,
       answers: formData,
       userId,
     };
+
     mutate(submissionPayload);
   };
   const handleRatingChange =
@@ -90,11 +97,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   <FormLabel component="legend" sx={{ color: "#fff" }}>
                     {question.text}
                   </FormLabel>
-                  <RadioGroup
-                    aria-label={question.text}
-                    defaultValue={question.placeholder}
-                    name={question.type}
-                  >
+                  <RadioGroup {...register(question.id)}>
                     {options.map((option, optionIndex) => (
                       <FormControlLabel
                         key={optionIndex}
