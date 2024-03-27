@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import {
   Questionnaire,
   Question,
@@ -28,6 +28,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
 }) => {
   // React Hook Form setup here...
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -97,16 +98,33 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                   <FormLabel component="legend" sx={{ color: "#fff" }}>
                     {question.text}
                   </FormLabel>
-                  <RadioGroup {...register(question.id)}>
-                    {options.map((option, optionIndex) => (
+                  <Controller
+                    name={question.id}
+                    control={control}
+                    render={({ field }) => (
+                      <RadioGroup {...field}>
+                        {options.map((option, index) => (
+                          <FormControlLabel
+                            defaultValue={""}
+                            key={index}
+                            value={option.toString()}
+                            control={<Radio />}
+                            label={option.toString()}
+                          />
+                        ))}
+                      </RadioGroup>
+                    )}
+                  />
+                  {/* <RadioGroup {...register(question.id)}>
+                    {options.map((option, index) => (
                       <FormControlLabel
-                        key={optionIndex}
-                        value={option.toString()}
+                        key={index}
+                        value={option.toString()} // Make sure each option has a unique value
                         control={<Radio />}
                         label={option.toString()}
                       />
                     ))}
-                  </RadioGroup>
+                  </RadioGroup> */}
                 </FormControl>
               </Box>
             );
