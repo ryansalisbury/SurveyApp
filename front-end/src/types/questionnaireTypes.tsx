@@ -7,6 +7,7 @@ export interface Question {
 }
 
 export interface Questionnaire {
+  _id?: string;
   id: string;
   title: string;
   description: string;
@@ -18,7 +19,7 @@ export interface RouteParams {
 }
 
 export interface SubmissionPayload {
-  questionnaireId: string;
+  questionnaireId: string | undefined;
   answers: FormData;
   userId: string;
 }

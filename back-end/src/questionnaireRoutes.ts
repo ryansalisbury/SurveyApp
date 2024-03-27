@@ -11,7 +11,6 @@ import { ObjectId } from "mongodb";
 export default function questionnaireRoutes(server: FastifyInstance) {
   server.get("/api/questionnaires", async (request, reply) => {
     try {
-
       // Accessing the MongoDB
       const collection = server.mongo.db?.collection("questionnaires");
       // Fetching all the documents in 'questionnaires' collection
@@ -61,10 +60,16 @@ export default function questionnaireRoutes(server: FastifyInstance) {
         const { id } = request.params;
         const questionnaire = await server.mongo.db
           ?.collection("questionnaires")
-          .findOneAndDelete({ id: request.params.id });
+          .findOneAndDelete({ _id: new ObjectId(id) });
+        await server.mongo.db
+          ?.collection("submissions")
+          .deleteMany({ questionnaireId: id });
         if (!questionnaire) {
           return reply.code(404).send;
         }
+        return reply.code(200).send({
+          message: "Questionnaire and associated answers deleted successfully",
+        });
       } catch (err) {
         console.error(err);
         return reply

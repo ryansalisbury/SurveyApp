@@ -56,3 +56,14 @@ export const questionnaireNewSubmission = async ({
     throw new Error("Failed to submit questionnaire");
   }
 };
+
+export const deleteQuestionnaireAndSubmittedAnswers = async (id: string) => {
+  try {
+    console.log("id: ", id);
+    const response = await axios.delete(`${BASE_URL}/delete/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to delete questionnaire and answers");
+  }
+};

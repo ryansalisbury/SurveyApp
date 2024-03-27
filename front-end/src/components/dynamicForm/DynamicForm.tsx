@@ -55,7 +55,7 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     });
 
     const submissionPayload = {
-      questionnaireId: questionnaire.id,
+      questionnaireId: questionnaire._id,
       answers: formData,
       userId,
     };
