@@ -115,16 +115,6 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
                       </RadioGroup>
                     )}
                   />
-                  {/* <RadioGroup {...register(question.id)}>
-                    {options.map((option, index) => (
-                      <FormControlLabel
-                        key={index}
-                        value={option.toString()} // Make sure each option has a unique value
-                        control={<Radio />}
-                        label={option.toString()}
-                      />
-                    ))}
-                  </RadioGroup> */}
                 </FormControl>
               </Box>
             );
