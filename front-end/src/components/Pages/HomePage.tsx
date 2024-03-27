@@ -19,6 +19,8 @@ const HomePage = () => {
     // Navigate to the questionnaire example page
     navigate("/questionnaire-1-test");
   };
+  const userId = localStorage.getItem("userId");
+  console.log("UserId", { userId });
   return (
     <header className="App-header">
       <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">

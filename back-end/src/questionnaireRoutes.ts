@@ -1,5 +1,10 @@
 import { FastifyInstance } from "fastify";
-import { Questionnaire, RouteParamsWithId } from "./models/models";
+import {
+  Questionnaire,
+  RouteParamsWithId,
+  SubmissionPayload,
+  FormData,
+} from "./models/models";
 import { request } from "http";
 import { ObjectId } from "mongodb";
 
@@ -68,6 +73,29 @@ export default function questionnaireRoutes(server: FastifyInstance) {
         return reply
           .code(500)
           .send({ message: "Failed to delete selected questionnaire" });
+      }
+    }
+  );
+  server.post<{ Body: SubmissionPayload }>(
+    "/api/questionnaires/submit-questionnaire",
+    async (request, reply) => {
+      try {
+        const { questionnaireId, answers, userId } = request.body;
+        const collection = server.mongo.db?.collection("submissions");
+
+        await collection?.insertOne({
+          questionnaireId,
+          answers,
+          userId,
+        });
+        return reply
+          .code(200)
+          .send({ message: "Successfully saved submission" });
+      } catch (err) {
+        console.error(err);
+        return reply.code(500).send({
+          message: "Failed to upload questionnaire answers to MongoDB",
+        });
       }
     }
   );

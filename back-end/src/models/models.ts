@@ -16,3 +16,13 @@ export interface Questionnaire {
 export interface RouteParamsWithId {
   id: string;
 }
+
+export interface SubmissionPayload {
+  questionnaireId: string;
+  answers: FormData;
+  userId: string;
+}
+
+export interface FormData {
+  [questionId: string]: string | boolean | number;
+}

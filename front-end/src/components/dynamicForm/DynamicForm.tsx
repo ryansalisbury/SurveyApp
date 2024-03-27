@@ -1,6 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Questionnaire, Question } from "../../types/questionnaireTypes";
+import {
+  Questionnaire,
+  Question,
+  FormData,
+  SubmissionPayload,
+} from "../../types/questionnaireTypes";
 import {
   Box,
   FormControl,
@@ -15,10 +20,13 @@ import {
   Button,
 } from "@mui/material";
 import { error } from "console";
+import { useMutation } from "react-query";
+import { questionnaireNewSubmission } from "../../services/questionnaireService";
 
 const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
   questionnaire,
 }) => {
+  // React Hook Form setup here...
   const {
     register,
     handleSubmit,
@@ -26,14 +34,25 @@ const DynamicForm: React.FC<{ questionnaire: Questionnaire }> = ({
     setValue,
     reset,
   } = useForm<FormData>();
-  // Example form data structure
-  interface FormData {
-    // Define structure based on your actual data needs
-    [questionId: string]: string | boolean | number;
-  }
-  const onSubmit = (data: any) => {
-    console.log("Test submission!");
-    console.log({ data });
+
+  // React Query's useMutation hook
+  const { isLoading, isError, data, error } = useMutation({
+    // Optional: OnSuccess, onError, onSettled callbacks.
+  });
+
+  const { mutate } = useMutation((payload: SubmissionPayload) =>
+    questionnaireNewSubmission(payload)
+  );
+
+  const onSubmit = (formData: FormData) => {
+    const userId = localStorage.getItem("userId") || "";
+
+    const submissionPayload = {
+      questionnaireId: questionnaire.id,
+      answers: formData,
+      userId,
+    };
+    mutate(submissionPayload);
   };
   const handleRatingChange =
     (questionId: string) => (event: any, newValue: any) => {

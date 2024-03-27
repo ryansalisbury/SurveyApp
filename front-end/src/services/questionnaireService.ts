@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Questionnaire } from "../types/questionnaireTypes";
+import { Questionnaire, SubmissionPayload } from "../types/questionnaireTypes";
+import { string } from "yup";
 
 // this file is the service class between the backend and the front-end.
 // Keeps code cleaner
@@ -29,13 +30,31 @@ export const fetchQuestionnaireById = async (
   id: string
 ): Promise<Questionnaire> => {
   try {
-    const response = await axios.get<Questionnaire >(
-      `${BASE_URL}/${id}`
-    );
+    const response = await axios.get<Questionnaire>(`${BASE_URL}/${id}`);
     console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch questionnaire");
+  }
+};
+
+export const questionnaireNewSubmission = async ({
+  questionnaireId,
+  answers,
+  userId,
+}: SubmissionPayload) => {
+  try {
+    console.log(" SUBMITTING NEW QUESTIONNIARE");
+    const response = await axios.post(`${BASE_URL}/submit-questionnaire`, {
+      questionnaireId,
+      answers,
+      userId,
+    });
+    console.log("Post response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to submit questionnaire");
   }
 };
