@@ -9,21 +9,38 @@ import {
   styled,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
-import QuestionnaireDetailsFields from "../QuestionnaireTitleField/QuestionnaireTitles";
+import QuestionnaireTitleFields from "../QuestionnaireTitleField/QuestionnaireTitles";
+import { Question, Questionnaire } from "../../types/questionnaireTypes";
+import { useMutation } from "react-query";
+import { createQuestionnaireApi } from "../../services/questionnaireService";
 
 const CreateQuestionnaire: React.FC = () => {
-  // Using react hook form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const methods = useForm<Questionnaire>();
 
-  const methods = useForm();
+  {
+    /*Ok so the useMutation hook and mutate 
+    function is used to trigger an asynchronous operation,
+    like data submission (Our createQuestionnaireApi() method). */
+  }
+  const { mutate, isLoading, isError, error } = useMutation(
+    createQuestionnaireApi,
+    {
+      onSuccess: (data: Questionnaire) => {
+        // Handle successful submission
+        // For example, show a success message or redirect
+        console.log("Questionnaire created:", data);
+      },
+      onError: (error) => {
+        // Handle any errors
+        console.error("Error creating questionnaire:", error);
+      },
+    }
+  );
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = (data: Questionnaire) => {
+    mutate(data); // Use mutate to trigger the mutation
   };
+
   return (
     <div>
       <NavBar />
@@ -50,7 +67,7 @@ const CreateQuestionnaire: React.FC = () => {
               spacing={2}
               sx={{ width: "100%", maxWidth: 500, margin: "auto" }}
             >
-              <QuestionnaireDetailsFields />
+              <QuestionnaireTitleFields />
               <Button type="submit" variant="contained" color="primary">
                 Add New Question
               </Button>
@@ -60,6 +77,11 @@ const CreateQuestionnaire: React.FC = () => {
             </Stack>
           </form>
         </FormProvider>
+        {isError && (
+          <div style={{ color: "red" }}>
+            {error instanceof Error ? error.message : "An error occurred"}
+          </div>
+        )}
       </Box>
     </div>
   );

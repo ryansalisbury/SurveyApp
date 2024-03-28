@@ -67,3 +67,16 @@ export const deleteQuestionnaireAndSubmittedAnswers = async (id: string) => {
     throw new Error("Failed to delete questionnaire and answers");
   }
 };
+
+export const createQuestionnaireApi = async (questionnaire: Questionnaire) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/create-questionnaire`,
+      questionnaire
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to create new questionnaire");
+  }
+};

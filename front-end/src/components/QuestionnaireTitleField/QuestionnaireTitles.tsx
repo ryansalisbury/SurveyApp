@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 
-const QuestionnaireDetailsFields = () => {
+const QuestionnaireTitleFields = () => {
   const {
     register,
     formState: { errors },
@@ -30,4 +30,4 @@ const QuestionnaireDetailsFields = () => {
   );
 };
 
-export default QuestionnaireDetailsFields;
+export default QuestionnaireTitleFields;
