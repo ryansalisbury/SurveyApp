@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/Pages/HomePage"; // Adjust the import path based on your file structure
 import QuestionnairePage from "./components/Pages/Questionnaire";
 import { v4 as uuidv4 } from "uuid"; // Import the uuid function
+import CreateQuestionnaire from "./components/Pages/CreateQuestionnaire";
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/questionnaire-1-test" element={<QuestionnairePage />} />
         <Route path="/questionnaire/:id" element={<QuestionnairePage />} />
+        <Route path="/questionnaire/create" element={<CreateQuestionnaire />} />
         {/* Add more Route components here for additional pages */}
       </Routes>
     </Router>
